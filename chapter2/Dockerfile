@@ -12,9 +12,12 @@ RUN apt-get update -qq >/dev/null && apt-get install -y -qq procps telnet apache
 RUN useradd --user-group --create-home --shell /bin/false app
 
 # set up and copy files to /home/app
-ENV HOME=/usr/app
+#ENV HOME=/usr/app
+ENV HOME=/var/www
 WORKDIR /home/app
-COPY . /home/app
+#WORKDIR /var/www
+#COPY . /home/app
+COPY . /var/www
 
 # The PHP app is going to save its state in /data so we make a /data inside the container
 RUN mkdir /data && chown -R app /data && chmod 777 /data
